@@ -16,6 +16,8 @@
 var width = 130;
 var height = 260;
 var greenValue = 0;
+var blueValue = 40;
+//var ellipseSize = 25;
 
 	 function sketchProc(processing) {
 	   processing.setup = function() {
@@ -25,17 +27,34 @@ var greenValue = 0;
 	   };
 	   processing.draw = function() {
 	   //The code to describe what you want to draw goes here.
-	    processing.background(15, greenValue,80);
-	   	processing.fill(255,greenValue,0);
+	    processing.background(15, 40,80);
+	   	processing.fill(255,greenValue,40);
 	   	processing.rect(10,20,width,height);
-	   	processing.fill(0,255,0);
-	   	processing.ellipse(processing.mouseX, processing.mouseY, 25, 25);
+	   	processing.fill(255,0,blueValue);
+	   	processing.rect(200,20,width,height);
+	   	
+	   	
 
-			if (height < 480) {
-		   	width = width + 0.5;
-		   	height = height + 0.8;
-		   	greenValue = greenValue + 0.8;
+
+			if (processing.mouseX > 10 && processing.mouseX < (width + 10) && processing.mouseY > 20 && processing.mouseY < (height + 20)) {
+				processing.fill(255,0,0);
+				//processing.ellipse(processing.mouseX, processing.mouseY, (ellipseSize * (processing.mouseX - 9)), (ellipseSize * (processing.mouseX - 9) );
+				processing.ellipse(processing.mouseX, processing.mouseY, 25 + processing.mouseY / 3, processing.mouseY / 3 );
+  			greenValue += 40;
+			} else {
+				greenValue = 0;
 			}
+
+
+			if (processing.mouseX > 200 && processing.mouseX < (width + 200) && processing.mouseY > 20 && processing.mouseY < (height + 20)) {
+				processing.fill(255,0,0);
+				processing.ellipse(processing.mouseX, processing.mouseY, 25, 25);
+  			blueValue += 40;
+			} else {
+				blueValue = 40;
+			}
+
+	
 
 	   };
  	 };
